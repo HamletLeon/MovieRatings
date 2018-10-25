@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MovieRatings</string>
+    <string name="google_flaticon_licence">Icons made by Google from www.flaticon.com is licensed by CC 3.0 BY</string>
+    <string name="not_specified">No especificado</string>
+    <string name="overview_not_specified">Argumento no especificado.</string>
+    <string name="title_not_specified">Titulo no especificado.</string>
+    <string name="release_date_not_specified">Fecha de publicación no especificada.</string>
+    <string name="language_acronym_not_specified">XX</string>
+    <string name="popularity_not_specified">0%</string>
+    <string name="movies">Peliculas</string>
+    <string name="favourites">Favoritos</string>
+    <string name="popularity">Popularidad</string>
+    <string name="no_votes">%1$d votos</string>
+    <string name="publish_at">Publicado el:</string>
+    <string name="status">Estado:</string>
+    <string name="budget">Presupuesto:</string>
+    <string name="revenues">Ganancias:</string>
+    <string name="empty_currency">$0</string>
+    <string name="argument">Argumento:</string>
+    <string name="genres">Generos:</string>
+    <string name="searching_movies">Cargando peliculas…</string>
+    <string name="searching_favourite_movies">Cargando peliculas favoritas…</string>
+    <string name="loading_movie_details">Cargando detalles de pelicula…</string>
+    <string name="release_date">Año de Publicación</string>
+    <string name="rating">Rating</string>
+    <string name="name">Nombre</string>
+    <string name="filter_by">Filtrar por:</string>
+</resources>
