@@ -57,18 +57,26 @@ class MoviesRepository(ctx: Context) {
     }
 
     suspend fun saveMovieBriefToFavourite(movie: MovieBrief): Pair<Boolean, Error?> {
+        return withContext(Dispatchers.IO) { saveMovieBriefToFavouriteById(movie.id) }
+    }
+
+    suspend fun saveMovieBriefToFavouriteById(movieId: Int): Pair<Boolean, Error?> {
         return withContext(Dispatchers.IO) {
             val favourite = FavouriteMovie()
             favourite.addedAt = Date().fromDate() ?: Calendar.getInstance().time.fromDate()
-            favourite.movieId = movie.id
+            favourite.movieId = movieId
             val res = localFavouriteMoviesRepository.insert(favourite)
 Pair(res > -1, if (res <= -1) Error(null, "No se pudo guardar en la base de datos.") else null)
         }
     }
 
     suspend fun deleteMovieBriefFromFavourite(movie: MovieBrief): Pair<Boolean, Error?> {
+        return withContext(Dispatchers.IO) { deleteMovieBriefFromFavouriteById(movie.id) }
+    }
+
+    suspend fun deleteMovieBriefFromFavouriteById(movieId: Int): Pair<Boolean, Error?> {
         return withContext(Dispatchers.IO) {
-            val favourite = localFavouriteMoviesRepository.getFavouriteMovieById(movie.id)
+            val favourite = localFavouriteMoviesRepository.getFavouriteMovieById(movieId)
             if (favourite != null) {
                 localFavouriteMoviesRepository.delete(favourite)
                 Pair(true, null)

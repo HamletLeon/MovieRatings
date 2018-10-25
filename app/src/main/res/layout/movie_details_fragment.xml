@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/mainLayout"
@@ -29,6 +30,20 @@
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/addToFavorites"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/topImage"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_margin="3dp"
+                app:srcCompat="@drawable/heart_icon"
+                app:tint="@android:color/white"
+                android:contentDescription="@string/google_flaticon_licence"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 

@@ -4,19 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.text.Layout
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hamletleon.moviewratings.R
 import com.hamletleon.moviewratings.models.movies.MovieDetails
 import com.hamletleon.moviewratings.models.movies.MovieStatus
-import com.hamletleon.moviewratings.utils.getCurrencyString
-import com.hamletleon.moviewratings.utils.load
-import com.hamletleon.moviewratings.utils.setDateToTextView
-import com.hamletleon.moviewratings.utils.setTextView
+import com.hamletleon.moviewratings.utils.*
 import kotlinx.android.synthetic.main.argument_details_layout.view.*
 import kotlinx.android.synthetic.main.movie_details_fragment.*
 import kotlinx.android.synthetic.main.popularity_details_layout.view.*
@@ -34,12 +29,17 @@ class MovieDetailsFragment: Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
 
+        setViewListener()
         setListeners()
 
         getArguments().let {
             arguments = MovieDetailsFragmentArgs.fromBundle(it)
             viewModel.getMovieDetails(arguments.movieId)
         }
+    }
+
+    private fun setViewListener() {
+        addToFavorites.setOnClickListener { viewModel.saveToFavorite(it, viewModel.movieDetails) }
     }
 
     private fun setListeners() {
@@ -52,6 +52,7 @@ class MovieDetailsFragment: Fragment() {
         viewModel.notifyView.observe(this, Observer {
             if (it == true) {
                 val details = viewModel.movieDetails
+                addToFavorites.setColorTint(if (details?.addedToFavourite == true) R.color.colorAccent else android.R.color.white)
                 topImage.load(details?.backdropPath ?: details?.posterPath, if (details?.backdropPath!= null) "w780" else "w185")
                 details?.title.setTextView(topTitle, R.string.title_not_specified)
                 setViewChildren(details)
@@ -61,6 +62,10 @@ class MovieDetailsFragment: Fragment() {
         viewModel.loading.observe(this, Observer {
             progressLayout.visibility = if (it == true) View.VISIBLE else View.INVISIBLE
             mainLayout.visibility = if (it != true) View.VISIBLE else View.INVISIBLE
+        })
+
+        viewModel.addedToFavourite.observe(this, Observer {
+            addToFavorites.setColorTint(if (it) R.color.colorAccent else android.R.color.white)
         })
     }
 

@@ -133,6 +133,7 @@
                         android:layout_height="30dp"
                         android:padding="3dp"
                         app:srcCompat="@drawable/heart_icon"
+                        app:tint="@color/ghost_grey"
                         android:contentDescription="@string/google_flaticon_licence" />
 
                 </LinearLayout>
